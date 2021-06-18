@@ -10,7 +10,7 @@ fetch(endpoint)
 function findMatches(wordToMatch, cities) {
     return cities.filter(place => {
         // in regex g=global and i=insensitive
-        const regex = RegExp(wordToMatch, 'gi')
+        const regex = new RegExp(wordToMatch, 'gi')
         return place.city.match(regex) || place.state.match(regex)
     })
 }
@@ -19,9 +19,12 @@ function displayMatches() {
     const matches = findMatches(this.value, cities)
     console.log(matches)
     const html = matches.map(match => {
+        const regex = new RegExp(this.value, 'gi')
+        const cityName = match.city.replace(regex, `<span class='hl'>${this.value}</span>`)
+
         return `
         <li>
-            <span>${match.city}, ${match.state}</span>
+            <span>${cityName}, ${match.state}</span>
             <span>${match.population}</span>
         </li>
         `
