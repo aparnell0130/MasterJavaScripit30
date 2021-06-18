@@ -7,10 +7,3 @@ fetch(endpoint)
     .then(allCities => cities.push(...allCities))
 
 
-function findMatches(wordToMatch, cities) {
-    return cities.filter(place => {
-        // in regex g=global and i=insensitive
-        const regex = RegExp(wordToMatch, 'gi')
-        return place.city.match(regex) || place.state.match(regex)
-    })
-}
