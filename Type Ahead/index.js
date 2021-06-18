@@ -16,19 +16,28 @@ function findMatches(wordToMatch, cities) {
 }
 
 function displayMatches() {
+
     const matches = findMatches(this.value, cities)
-    console.log(matches)
+
     const html = matches.map(match => {
+
+        if (this.value === '') {
+            return;
+        }
+
         const regex = new RegExp(this.value, 'gi')
+
         const cityName = match.city.replace(regex, `<span class='hl'>${this.value}</span>`)
+        const stateName = match.state.replace(regex, `<span class='hl'>${this.value}</span>`)
 
         return `
         <li>
-            <span>${cityName}, ${match.state}</span>
+            <span>${cityName}, ${stateName}</span>
             <span>${match.population}</span>
         </li>
         `
     }).join('')
+
     suggestions.innerHTML = html
 }
 
