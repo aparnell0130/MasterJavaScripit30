@@ -15,3 +15,22 @@ function findMatches(wordToMatch, cities) {
     })
 }
 
+function displayMatches() {
+    const matches = findMatches(this.value, cities)
+    console.log(matches)
+    const html = matches.map(match => {
+        return `
+        <li>
+            <span>${match.city}, ${match.state}</span>
+            <span>${match.population}</span>
+        </li>
+        `
+    }).join('')
+    suggestions.innerHTML = html
+}
+
+const searchInput = document.querySelector('.search')
+const suggestions = document.querySelector('.suggestions')
+
+searchInput.addEventListener('change', displayMatches)
+searchInput.addEventListener('keyup', displayMatches)
