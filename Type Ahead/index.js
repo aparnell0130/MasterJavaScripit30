@@ -27,13 +27,15 @@ function displayMatches() {
 
         const regex = new RegExp(this.value, 'gi')
 
+        const population = match.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
         const cityName = match.city.replace(regex, `<span class='hl'>${this.value}</span>`)
         const stateName = match.state.replace(regex, `<span class='hl'>${this.value}</span>`)
 
         return `
         <li>
             <span>${cityName}, ${stateName}</span>
-            <span>${match.population}</span>
+            <span>${population}</span>
         </li>
         `
     }).join('')
